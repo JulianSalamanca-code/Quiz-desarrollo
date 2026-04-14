@@ -3,22 +3,21 @@ package desarrolloempresarial.quiz2.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Setter
-@Getter
+@Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-public class User {
+public class Kitchen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-    private String password;
+    private String restaurantName;
+    private int capacity;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToOne
+    @JoinColumn(name = "chef_id")
+    private Chef chef;
 }
-

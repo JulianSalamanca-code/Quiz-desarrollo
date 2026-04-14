@@ -3,22 +3,22 @@ package desarrolloempresarial.quiz2.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Setter
-@Getter
+@Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-public class User {
-
+public class Chef {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-    private String password;
+    private String name;
+    private String specialization;
+    private int age;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }
-
