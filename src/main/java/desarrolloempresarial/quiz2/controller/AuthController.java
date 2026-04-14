@@ -30,4 +30,21 @@ public class AuthController {
     public String register(@RequestBody RegisterRequest request) {
         User user = new User();
         user.setUsername(request.getUsername());
-        user.setPassword(encoder.encode(request
+        user.setPassword(encoder.encode(request.getPassword();
+        user.setRole(Role.vauleOf(request.getRole().toUpperCase()));
+
+        if (user.getRole() == Role.CHEF) {
+            Chef chef = new Chef();
+            chef.setNombre(request.getNombreChef());
+            chef.setEspecialidad(request.getEspecialidad());
+            chef.setUser(user);
+            user.setChef(chef);
+            chefRepo.save(chef);
+        }
+
+        userRepo.save(user);
+
+
+        return jwtUtil.generateToken(user.getUsername());
+    }
+}
